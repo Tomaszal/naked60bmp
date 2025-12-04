@@ -36,7 +36,7 @@
           firmware = inputs'.zmk-nix.legacyPackages.buildKeyboard {
             name = "zmk-firmware";
 
-            zephyrDepsHash = "sha256-9xdpgu0/A2ZWmJNSlyQ172MGCnkOf/A8WLYp7dvjJ5A=";
+            zephyrDepsHash = "sha256-SHiCGErcstMH9EbvbQROXIhxFEbMf3AungYu5YvqMEg=";
 
             src = lib.sourceFilesBySuffices ./. [".yml" ".conf" ".keymap"];
 
