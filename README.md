@@ -1,7 +1,25 @@
 # Personal Naked60BMP configuration
 
-Build using Nix:
+- Powered by [ZMK Firmware](https://zmk.dev/)
+- Built with [ZMK Nix](https://github.com/lilyinstarlight/zmk-nix)
 
-```bash
+## Usage
+
+Build and automatically flash firmware:
+
+```
+nix run .#flash
+```
+
+Build firmware only:
+
+```
 nix build
+```
+
+Update dependencies:
+
+```
+nix flake update
+nix run .#update
 ```
