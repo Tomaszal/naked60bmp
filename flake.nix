@@ -3,23 +3,16 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     systems.url = "github:nix-systems/default";
-    zmk-nix.url = "github:lilyinstarlight/zmk-nix";
     rust-overlay.url = "github:oxalica/rust-overlay";
 
     flake-parts.inputs.nixpkgs-lib.follows = "nixpkgs";
-    zmk-nix.inputs.nixpkgs.follows = "nixpkgs";
     rust-overlay.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs:
     inputs.flake-parts.lib.mkFlake {inherit inputs;} {
       systems = import inputs.systems;
-      perSystem = {
-        pkgs,
-        lib,
-        inputs',
-        ...
-      }: let
+      perSystem = {pkgs, ...}: let
         rustPkgs = import inputs.nixpkgs {
           inherit (pkgs.stdenv.hostPlatform) system;
           overlays = [inputs.rust-overlay.overlays.default];
@@ -45,7 +38,6 @@
           }
         ];
       in {
-        devShells.zmk = inputs'.zmk-nix.devShells.default;
         devShells.default = pkgs.mkShell {
           CC_thumbv7em_none_eabihf = "${pkgs.gcc-arm-embedded}/bin/arm-none-eabi-gcc";
           AR_thumbv7em_none_eabihf = "${pkgs.gcc-arm-embedded}/bin/arm-none-eabi-ar";
@@ -62,24 +54,6 @@
             gcc-arm-embedded
             moon
           ];
-        };
-
-        packages = let
-          firmware = inputs'.zmk-nix.legacyPackages.buildKeyboard {
-            name = "zmk-firmware";
-
-            zephyrDepsHash = "sha256-SHiCGErcstMH9EbvbQROXIhxFEbMf3AungYu5YvqMEg=";
-
-            src = lib.sourceFilesBySuffices ./. [".yml" ".conf" ".keymap"];
-
-            board = "nice_nano_v2";
-            shield = "naked60";
-          };
-        in {
-          inherit firmware;
-          default = firmware;
-          flash = inputs'.zmk-nix.packages.flash.override {inherit firmware;};
-          update = inputs'.zmk-nix.packages.update;
         };
       };
     };

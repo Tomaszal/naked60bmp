@@ -48,5 +48,3 @@ services.udev.extraRules = ''
   KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="4c4b", ATTRS{idProduct}=="6060", MODE="0660", GROUP="users", TAG+="uaccess"
 '';
 ```
-
-The original ZMK firmware is available via `nix build .#firmware`.
