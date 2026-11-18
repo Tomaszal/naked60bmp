@@ -13,7 +13,9 @@
         {"name": "NEXT_BT", "title": "Next Bluetooth profile", "shortName": "Next BT"},
         {"name": "PREV_BT", "title": "Previous Bluetooth profile", "shortName": "Prev BT"},
         {"name": "CLR_BT", "title": "Clear current Bluetooth bond", "shortName": "Clear BT"},
-        {"name": "OUTPUT", "title": "Toggle USB/Bluetooth output", "shortName": "Output"}
+        {"name": "OUTPUT", "title": "Toggle USB/Bluetooth output", "shortName": "Output"},
+        {"name": "RESERVED", "title": "Reserved by RMK; unused on this keyboard", "shortName": "Reserved"},
+        {"name": "SwitchToDongle", "title": "Switch to dongle; hold 5 seconds to clear its bond", "shortName": "Dongle"}
     ],
     "layouts": {
         "keymap": [

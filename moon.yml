@@ -9,6 +9,7 @@ tasks:
   build:
     deps:
       - keyboard/build
+      - dongle/build
     preset: utility
 
   check:
@@ -27,6 +28,16 @@ tasks:
       mkdir -p "$FIRMWARE_UF2_DIR"
       llvm-objcopy -O ihex "$firmware" "$firmware.hex"
       python3 "$UF2CONV" --convert --family 0xADA52840 --output "$FIRMWARE_UF2_DIR/naked60bmp.uf2" "$firmware.hex"
+
+  dongle/build:
+    preset: utility
+    script: |
+      set -eu
+      cargo build --release --locked --bin naked60bmp-dongle
+      firmware="$FIRMWARE_BIN_DIR/naked60bmp-dongle"
+      mkdir -p "$FIRMWARE_UF2_DIR"
+      llvm-objcopy -O ihex "$firmware" "$firmware.hex"
+      python3 "$UF2CONV" --convert --family 0xADA52840 --output "$FIRMWARE_UF2_DIR/naked60bmp-dongle.uf2" "$firmware.hex"
 
   rust/lint:
     preset: utility

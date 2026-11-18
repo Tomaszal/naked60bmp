@@ -10,10 +10,16 @@ name = "naked60bmp"
 test = false
 bench = false
 
+[[bin]]
+name = "naked60bmp-dongle"
+path = "src/dongle.rs"
+test = false
+bench = false
+
 [dependencies]
 # RMK 0.9.0 rejects BIOS boot-protocol requests (https://github.com/rmk-rs/rmk/pull/1107).
 # Pin upstream with that fix, boot-mode report filtering and USB reset recovery until released.
-rmk = { git = "https://github.com/rmk-rs/rmk", rev = "aacd1d07255f476cd91d9dd8ab8af56afd22ce4a", default-features = false, features = ["defmt", "storage", "vial", "host_lock", "watchdog", "async_matrix", "nrf52840_ble", "adafruit_bl"] }
+rmk = { git = "https://github.com/rmk-rs/rmk", rev = "aacd1d07255f476cd91d9dd8ab8af56afd22ce4a", default-features = false, features = ["defmt", "storage", "vial", "host_lock", "dongle", "watchdog", "async_matrix", "nrf52840_ble", "adafruit_bl"] }
 # Match the pinned RMK revision's nRF examples and bt-hci 0.11 controller API.
 nrf-sdc = { git = "https://github.com/alexmoon/nrf-sdc", rev = "9cf87fa7883b89b2d4dc7cd94864da7927bd858c", features = ["defmt", "peripheral", "central", "nrf52840"] }
 nrf-mpsl = { git = "https://github.com/alexmoon/nrf-sdc", rev = "9cf87fa7883b89b2d4dc7cd94864da7927bd858c", features = ["defmt", "critical-section-impl", "nrf52840"] }

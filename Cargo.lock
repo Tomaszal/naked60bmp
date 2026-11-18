@@ -1953,6 +1953,7 @@ version = "0.4.0"
 source = "git+https://github.com/rmk-rs/rmk?rev=aacd1d07255f476cd91d9dd8ab8af56afd22ce4a#aacd1d07255f476cd91d9dd8ab8af56afd22ce4a"
 dependencies = [
  "bitfield-struct",
+ "cobs",
  "defmt 1.2.0",
  "heapless 0.9.3",
  "postcard",

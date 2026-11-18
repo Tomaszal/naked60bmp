@@ -61,7 +61,7 @@ _               _               _               _               _               
 [[keymap.layer]]
 name = "bluetooth"
 keys = """
-Bootloader      @bt0            @bt1            @bt2            @bt3            @bt4            @bt_previous    @bt_next        @bt_clear       @output_toggle  PrintScreen     No
+Bootloader      @switch_to_dongle @bt1           @bt2            @bt3            @bt4            @bt_previous    @bt_next        @bt_clear       @output_toggle  PrintScreen     No
 Reboot          No              No              No              No              No              No              No              @bt_clear_all   No              No              No
 No              No              No              No              No              No              No              No              No              No              No              No
 No              No              No              No              No              No              No              No              No              No              No              No
@@ -88,6 +88,8 @@ bt_next = "User5"
 bt_previous = "User6"
 bt_clear = "User7"
 output_toggle = "User8"
+# RMK reserves User(N+4) for split-peer reset and User(N+5) for the dongle.
+switch_to_dongle = "User10"
 # ClearEeprom resets all persistent settings and reboots.
 bt_clear_all = "ClearEeprom"
 
