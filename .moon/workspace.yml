@@ -1,0 +1,18 @@
+$schema: ./cache/schemas/workspace.json
+
+projects:
+  firmware: .
+
+defaultProject: firmware
+
+telemetry: false
+
+hasher:
+  ignorePatterns:
+    - .direnv/**/*
+    - result
+    - target/**/*
+    - .moon/cache/**/*
+
+vcs:
+  defaultBranch: main

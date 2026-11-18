@@ -1,0 +1,41 @@
+language: rust
+toolchains:
+  default: system
+env:
+  FIRMWARE_BIN_DIR: target/thumbv7em-none-eabihf/release
+  FIRMWARE_UF2_DIR: target/firmware
+
+tasks:
+  build:
+    deps:
+      - keyboard/build
+    preset: utility
+
+  check:
+    deps:
+      - rust/lint
+      - rust/check-format
+      - nix/check-format
+    preset: utility
+
+  keyboard/build:
+    preset: utility
+    script: |
+      set -eu
+      cargo build --release --locked --bin naked60bmp
+      firmware="$FIRMWARE_BIN_DIR/naked60bmp"
+      mkdir -p "$FIRMWARE_UF2_DIR"
+      llvm-objcopy -O ihex "$firmware" "$firmware.hex"
+      python3 "$UF2CONV" --convert --family 0xADA52840 --output "$FIRMWARE_UF2_DIR/naked60bmp.uf2" "$firmware.hex"
+
+  rust/lint:
+    preset: utility
+    command: cargo clippy --release --locked -- -D warnings
+
+  rust/check-format:
+    preset: utility
+    command: cargo fmt --check
+
+  nix/check-format:
+    preset: utility
+    command: alejandra --check flake.nix
